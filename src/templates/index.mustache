@@ -9,7 +9,7 @@
         {{#keys}}
         <div class="row">
             {{#.}}
-            <button type="button"{{#class}} class="{{name}}-key{{#align}} text-{{align}}{{/align}}{{#hiddenText}} hidden-text{{/hiddenText}}"{{/class}}>
+            <button type="button" data-key-name="{{{name}}}"{{#class}} class="{{name}}-key{{#align}} text-{{align}}{{/align}}{{#hiddenText}} hidden-text{{/hiddenText}}"{{/class}}{{#code}} data-key-code="{{code}}"{{/code}}>
                 {{name}}
             </button>
             {{/.}}

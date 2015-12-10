@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     bowerRequirejs: {
         target: {
-          rjsConfig: 'src/js/config.js',
+          rjsConfig: 'src/js/app.js',
           options: {
               exclude: ['requirejs']
           }
@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         options: {
           appDir: "src/js",
           baseUrl: ".",
-          mainConfigFile: "src/js/config.js",
+          mainConfigFile: "src/js/app.js",
           modules: [
               {name: "app/main"}
           ],

@@ -9209,12 +9209,94 @@ return jQuery;
 
 }));
 
-define('app/main',['jquery'], function($) {
+define('minivents',[],function(){return function(n){var t,f,i,e={},o=[];n=n||this,n.on=function(n,t,f){(e[n]=e[n]||[]).push([t,f])},n.off=function(n,f){for(n||(e={}),t=e[n]||o,i=t.length=f?t.length:0;i--;)f==t[i][0]&&t.splice(i,1)},n.emit=function(n){for(t=e[n]||o,i=0;f=t[i++];)f[0].apply(f[1],o.slice.call(arguments,1))}}});
+define('app/key',['jquery'], function($) {
+
+    function Key(opts) {
+
+        opts = opts || {};
+
+        this.el = opts.el;
+        this.name = opts.name;
+        this.code = opts.code;
+        this.pressed = false;
+        this.pressedClass = 'pressed';
+    };
+
+    Key.prototype.keydown = function() {
+        this.pressed = true;
+        this.el.addClass(this.pressedClass);
+    }
+
+    Key.prototype.keyup = function() {
+        this.pressed = false;
+        this.el.removeClass(this.pressedClass);
+    }
+
+    return Key;
+
+});
+
+define('app/keyboard',['jquery', 'minivents', 'app/key'], function($, Events, Key) {
+
+    function Keyboard(opts) {
+
+        opts = opts || {};
+
+        this.id = opts.id;
+        this.codeAttr = opts.codeAttr || 'data-key-code';
+        this.nameAttr = opts.nameAttr || 'data-key-name';
+        this.el = $('#'+this.id);
+        this.keys = [];
+        this.pressed = [];
+
+        var self = this;
+        this.el.find('['+this.codeAttr+']').each(function(){
+            var code = parseInt($(this).attr(self.codeAttr)),
+                name = $(this).attr(self.nameAttr),
+                el = $(this);
+            self.keys[code] = new Key({
+                el: el,
+                name: name,
+                code: code
+            });
+        });
+
+        $('body').keydown(function(e){
+
+            if (self.keys[e.keyCode]) {
+                e.preventDefault();
+                self.keys[e.keyCode].keydown();
+            }
+
+        });
+
+        $('body').keyup(function(e){
+
+            if (self.keys[e.keyCode]) {
+                e.preventDefault();
+                self.keys[e.keyCode].keyup();
+            }
+
+        });
+
+    };
+
+    return Keyboard;
+
+});
+
+define('app/main',['jquery','app/keyboard'], function($, Keyboard) {
 
 	var module = {
 
+        keyboard: null,
+
 		init: function() {
 			console.log('main init');
+
+            this.keyboard = new Keyboard({id:'keyboard'});
+
 		}
 
 	};

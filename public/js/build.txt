@@ -2,4 +2,7 @@
 app/main.js
 ----------------
 components/jquery/dist/jquery.js
+components/minivents/dist/minivents.amd.min.js
+app/key.js
+app/keyboard.js
 app/main.js
