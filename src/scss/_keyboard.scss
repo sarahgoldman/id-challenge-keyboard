@@ -1,0 +1,75 @@
+$text: #fff;
+$keys: #444;
+$border: #111;
+$shadow: #222;
+$highlight: #666;
+
+.keyboard {
+  .row {
+    margin-top: .8vw;
+    @extend .clearfix;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  button {
+    float: left;
+    width: 6%;
+    padding: 2.5% 1.5%;
+    margin-left: .7%;
+
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 1.7vw;
+    text-align: center;
+
+    background: linear-gradient($highlight, $keys 6%);
+    color: $text;
+    border: none;
+    border-radius: .5vw;
+    box-shadow: 0 1px 1px $shadow,
+      inset 0 0 1px $border;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .backspace-key,
+  .tab-key,
+  .search-key {
+    width: 12%;
+  }
+
+  .enter-key {
+    width: 12.7%;
+  }
+
+  .shift-key {
+    width: 15.6%;
+  }
+
+  .ctrl-key:nth-of-type(1),
+  .alt-key:nth-of-type(2) {
+    width: 14.5%;
+  }
+
+  .space-key {
+    width: 33%;
+  }
+
+  .alt-key:nth-of-type(4) {
+    width: 10%;
+  }
+
+  .ctrl-key:nth-of-type(5) {
+    width: 6.8%;
+  }
+}
+
+textarea {
+  width: 98%;
+  height: 5rem;
+  margin-bottom: 2vw;
+}

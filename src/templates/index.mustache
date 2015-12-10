@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>HTML Keyboard</title>
+    <link rel="stylesheet" type="text/css" href="css/app.min.css" />
+</head>
+<body>
+    <textarea id="output"></textarea>
+    <div class="keyboard" id="keyboard">
+        {{#keys}}
+        <div class="row">
+            {{#.}}
+            <button type="button"{{#class}} class="{{name}}-key{{#align}} text-{{align}}{{/align}}{{#hiddenText}} hidden-text{{/hiddenText}}"{{/class}}>
+                {{name}}
+            </button>
+            {{/.}}
+        </div>
+        {{/keys}}
+    </div>
+    <script data-main="js/app" src="js/components/requirejs/require.js"></script>
+</body>
+</html>

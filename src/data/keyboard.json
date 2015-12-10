@@ -1,0 +1,72 @@
+{
+  "keys" : [
+      [
+          {"name": "~", "id": ""},
+          {"name": "1", "id": ""},
+          {"name": "2", "id": ""},
+          {"name": "3", "id": ""},
+          {"name": "4", "id": ""},
+          {"name": "5", "id": ""},
+          {"name": "6", "id": ""},
+          {"name": "7", "id": ""},
+          {"name": "8", "id": ""},
+          {"name": "9", "id": ""},
+          {"name": "0", "id": ""},
+          {"name": "-", "id": ""},
+          {"name": "=", "id": ""},
+          {"name": "backspace", "class": true, "id": ""}
+      ],
+      [
+          {"name": "tab", "align": "left", "class": true, "id": ""},
+          {"name": "q", "id": ""},
+          {"name": "w", "id": ""},
+          {"name": "e", "id": ""},
+          {"name": "r", "id": ""},
+          {"name": "t", "id": ""},
+          {"name": "y", "id": ""},
+          {"name": "u", "id": ""},
+          {"name": "i", "id": ""},
+          {"name": "o", "id": ""},
+          {"name": "p", "id": ""},
+          {"name": "[", "id": ""},
+          {"name": "]", "id": ""},
+          {"name": "\\", "id": ""}
+      ],
+      [
+          {"name": "search", "align": "left", "class": true, "id": ""},
+          {"name": "a", "id": ""},
+          {"name": "s", "id": ""},
+          {"name": "d", "id": ""},
+          {"name": "f", "id": ""},
+          {"name": "g", "id": ""},
+          {"name": "h", "id": ""},
+          {"name": "j", "id": ""},
+          {"name": "k", "id": ""},
+          {"name": "l", "id": ""},
+          {"name": ";", "id": ""},
+          {"name": "'", "id": ""},
+          {"name": "enter", "align": "right", "class": true, "id": ""}
+      ],
+      [
+          {"name": "shift", "align": "left", "class": true, "id": ""},
+          {"name": "z", "id": ""},
+          {"name": "x", "id": ""},
+          {"name": "c", "id": ""},
+          {"name": "v", "id": ""},
+          {"name": "b", "id": ""},
+          {"name": "n", "id": ""},
+          {"name": "m", "id": ""},
+          {"name": "<", "id": ""},
+          {"name": ">", "id": ""},
+          {"name": "/", "id": ""},
+          {"name": "shift", "align": "right", "class": true, "id": ""}
+      ],
+      [
+          {"name": "ctrl", "align": "left", "class": true, "id": ""},
+          {"name": "alt", "align": "left", "class": true, "id": ""},
+          {"name": "space", "hiddenText": true, "class": true, "id": ""},
+          {"name": "alt", "align": "right", "class": true, "id": ""},
+          {"name": "ctrl", "align": "right", "class": true, "id": ""}
+      ]
+  ]
+}
