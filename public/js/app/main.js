@@ -9213,24 +9213,39 @@ define('minivents',[],function(){return function(n){var t,f,i,e={},o=[];n=n||thi
 define('app/key',['jquery'], function($) {
 
     function Key(opts) {
-
         opts = opts || {};
 
         this.el = opts.el;
         this.name = opts.name;
         this.code = opts.code;
+        this.eventManager = opts.eventManager;
         this.pressed = false;
         this.pressedClass = 'pressed';
+
+        var self = this;
+        this.el.click(function(e){
+            e.preventDefault();
+            self.keydown();
+            self.keyup();
+        });
     };
 
     Key.prototype.keydown = function() {
         this.pressed = true;
         this.el.addClass(this.pressedClass);
+
+        if (this.eventManager) {
+            this.eventManager.emit('KEY_DOWN', this);
+        }
     }
 
     Key.prototype.keyup = function() {
         this.pressed = false;
         this.el.removeClass(this.pressedClass);
+
+        if (this.eventManager) {
+            this.eventManager.emit('KEY_UP', this);
+        }
     }
 
     return Key;
@@ -9248,18 +9263,34 @@ define('app/keyboard',['jquery', 'minivents', 'app/key'], function($, Events, Ke
         this.nameAttr = opts.nameAttr || 'data-key-name';
         this.el = $('#'+this.id);
         this.keys = [];
-        this.pressed = [];
+        this.display = $('#'+opts.displayId);
+        this.value = '';
+
+        this.specials = [];
 
         var self = this;
+
+        this.eventManager = new Events();
+        this.eventManager.on('KEY_UP', function(data){
+            self.handleKeyUp(data)
+        });
+
         this.el.find('['+this.codeAttr+']').each(function(){
             var code = parseInt($(this).attr(self.codeAttr)),
                 name = $(this).attr(self.nameAttr),
-                el = $(this);
-            self.keys[code] = new Key({
-                el: el,
-                name: name,
-                code: code
-            });
+                el = $(this),
+                key = new Key({
+                    el: el,
+                    name: name,
+                    code: code,
+                    eventManager: self.eventManager
+                });
+
+            self.keys[code] = key;
+
+            if (name.length > 1) {
+                self.specials[key.name] = key;
+            }
         });
 
         $('body').keydown(function(e){
@@ -9282,6 +9313,49 @@ define('app/keyboard',['jquery', 'minivents', 'app/key'], function($, Events, Ke
 
     };
 
+    Keyboard.prototype.handleKeyUp = function(data) {
+        var key = data;
+
+        if (!this.specials[key.name]) {
+            this.addCharacter(key.name);
+        } else {
+            switch (key.name) {
+                case 'space':
+                    this.addCharacter(' ');
+                    break;
+                case 'backspace':
+                    this.deleteCharacter();
+                    break;
+                case 'tab':
+                    this.addCharacter('\t');
+                    break;
+                case 'enter':
+                    this.addCharacter('\n');
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    Keyboard.prototype.addCharacter = function(c) {
+        if (this.specials['shift'].pressed) {
+            c = c.toUpperCase();
+        }
+        this.value += c;
+        this.updateDisplay();
+    }
+
+    Keyboard.prototype.deleteCharacter = function() {
+        this.value = this.value.slice(0, -1);
+        this.updateDisplay();
+    }
+
+    Keyboard.prototype.updateDisplay = function() {
+        this.display.focus();
+        this.display.val(this.value);
+    }
+
     return Keyboard;
 
 });
@@ -9295,7 +9369,7 @@ define('app/main',['jquery','app/keyboard'], function($, Keyboard) {
 		init: function() {
 			console.log('main init');
 
-            this.keyboard = new Keyboard({id:'keyboard'});
+            this.keyboard = new Keyboard({id:'keyboard', displayId: 'output'});
 
 		}
 

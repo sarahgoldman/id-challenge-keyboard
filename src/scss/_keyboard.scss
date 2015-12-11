@@ -3,6 +3,7 @@ $keys: #444;
 $border: #111;
 $shadow: #222;
 $highlight: #666;
+$led: #99ff99;
 
 .keyboard {
   .row {
@@ -36,7 +37,8 @@ $highlight: #666;
     }
 
     &.pressed {
-        background: red;
+        background: $keys;
+        box-shadow: none;
     }
   }
 

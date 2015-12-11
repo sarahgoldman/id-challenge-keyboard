@@ -7,7 +7,7 @@ define(['jquery','app/keyboard'], function($, Keyboard) {
 		init: function() {
 			console.log('main init');
 
-            this.keyboard = new Keyboard({id:'keyboard'});
+            this.keyboard = new Keyboard({id:'keyboard', displayId: 'output'});
 
 		}
 
